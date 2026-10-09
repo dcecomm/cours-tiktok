@@ -54,7 +54,7 @@ if (cmd === 'liste') {
   const seul = opt(args, 'seulement'), manque = cat.plans.filter(p => !la(p) && p.source && (!seul || seul === true || String(seul).split(',').includes(p.nom)));
   if (!manque.length) { console.log(`La banque est complète : ${cat.plans.length} plans.`); process.exit(0); }
   const total = manque.reduce((s, p) => s + p.poids_mo * 1048576, 0);
-  console.log(`${manque.length} vidéos à télécharger depuis Pexels (videos.pexels.com), ${mo(total)} en tout, dans ${DOSSIER} :`);
+  console.log(`${manque.length} vidéo${manque.length > 1 ? 's' : ''} à télécharger depuis Pexels (videos.pexels.com), ${mo(total)} en tout, dans ${DOSSIER} :`);
   console.log(manque.map(p => `  ${p.fichier} (${String(p.poids_mo).replace('.', ',')} Mo)`).join('\n'));
   if (!oui) { console.log(`\nRien n'est téléchargé. Après son accord : node outils/banque.mjs installer --oui`); process.exit(2); }
   mkdirSync(DOSSIER, { recursive: true });
@@ -63,7 +63,9 @@ if (cmd === 'liste') {
     try { const o = await telecharger(p.source, join(DOSSIER, p.fichier)); console.log(`  OK      ${p.fichier}  ${mo(o)}`); }
     catch (e) { rate++; console.log(`  ÉCHEC   ${p.fichier} : ${e.message}`); }
   }
-  console.log(rate ? `\n${rate} vidéo(s) non téléchargée(s) : relancer la commande. Si une adresse ne répond plus, chercher un plan de rechange (references/banque.md).` : `\nLa banque est complète : ${cat.plans.length} plans.`);
+  const reste = cat.plans.filter(p => !la(p)).length;
+  console.log(rate ? `\n${rate} vidéo(s) non téléchargée(s) : relancer la commande. Si une adresse ne répond plus, chercher un plan de rechange (references/banque.md).`
+    : reste ? `\nTéléchargé. Il manque encore ${reste} vidéo(s) du catalogue.` : `\nLa banque est complète : ${cat.plans.length} plans.`);
   process.exit(rate ? 1 : 0);
 } else if (cmd === 'ajouter') {
   const [nom, url] = args.slice(1).filter(a => !a.startsWith('--') && a !== opt(args, 'page') && a !== opt(args, 'voit') && a !== opt(args, 'pour') && a !== opt(args, 'reglages'));

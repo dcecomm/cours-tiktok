@@ -53,9 +53,10 @@ git clone https://github.com/dcecomm/cours-tiktok ~/.claude/skills/cours-tiktok
 cd ~/.claude/skills/cours-tiktok
 ```
 
-Si le dépôt est privé et que le clonage est refusé : son frère doit l'inviter sur le dépôt (elle a
-alors besoin d'un compte GitHub, et la première commande `git clone` ouvre une fenêtre pour se
-connecter), ou lui envoyer le dossier en archive, à décompresser à cet endroit.
+Sans Git : télécharger https://github.com/dcecomm/cours-tiktok/archive/refs/heads/main.zip, le
+décompresser, renommer le dossier `cours-tiktok-main` en `cours-tiktok` et le poser dans le dossier
+`skills` ci-dessus. (La mise à jour se fera alors en retéléchargeant l'archive, sans toucher aux
+dossiers `bin`, `modeles`, `banque` et `node_modules`.)
 
 ### 3. Dire ce qui va être téléchargé, puis installer
 

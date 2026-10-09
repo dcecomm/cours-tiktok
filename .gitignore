@@ -1,0 +1,11 @@
+node_modules/
+cours/
+essais/
+bin/*
+!bin/.gitkeep
+modeles/*
+!modeles/.gitkeep
+outils/_*
+*.wav
+.DS_Store
+banque/

@@ -1,0 +1,10 @@
+{
+  "name": "cours-tiktok",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Moteur de dessin et de rendu des TikToks tirés d'un cours",
+  "dependencies": {
+    "@napi-rs/canvas": "1.0.9"
+  }
+}
